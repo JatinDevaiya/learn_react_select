@@ -1,23 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Select from "react-select";
+// import "./App.css";
 
 function App() {
+  const [value, setValue] = useState(null);
+  const options = [
+    { value: "banana", label: "banana" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+    { value: "chocolate", label: "Chocolate" },
+    { value: "apple", label: "apple" },
+    { value: "orange", label: "orange" },
+    { value: "pinaple", label: "pinaple" },
+  ];
+  console.log(options);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ margin: 20, width: 300 }}>
+      <Select
+        options={options}
+        defaultValue={value}
+        onChange={setValue}
+        isMulti
+        noOptionsMessage={() => "Not avabile"}
+        // isDisabled
+        placeholder="Please select your Favorite Fruits..."
+        styles={{
+          placeholder: (basestyle, state) => ({
+            ...basestyle,
+            color: "gray",
+          }),
+          clearIndicator: (basestyle) => ({
+            ...basestyle,
+            color: "red",
+          }),
+          control: (basestyle) => ({
+            ...basestyle,
+            color: "green",
+          }),
+          multiValueRemove: (basestyle, state) => ({
+            ...basestyle,
+            color: state.isFocused ? "red" : "gray",
+            backgroundColor: state.isFocused ? "black" : "lightgreen",
+          }),
+        }}
+      />
     </div>
   );
 }
